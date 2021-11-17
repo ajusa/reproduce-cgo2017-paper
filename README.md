@@ -1,3 +1,24 @@
+# Actual Getting Started
+
+Make sure you have llvm 12 properly set up (for me, everything worked after installing it normally).
+Next, clone this repository. Here are the useful commands:
+
+```
+cd build/
+cmake ..
+cd ..
+make -C build/
+clang -emit-llvm hello.c -c -o hello.bc
+opt -O3 -load build/indirect/LLVMPJT.so < hello.bc > /dev/nul
+```
+The first three are basically just a one time setup to get CMake to understand where to build the pass.
+The `make` command is what actually builds the pass, so do that after any changes.
+The last two lines show how to compile and execute an example C program through the pass. The only difference with this from the
+templates in class is the `-O3`. This is required because this pass only runs after vectorization,
+which happens on the highest optimization option.
+
+
+
 Artefact Evaluation Reproduction for "Software Prefetching for Indirect Memory Accesses", CGO 2017, using CK. 
 ==================================================
 
