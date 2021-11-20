@@ -9,7 +9,7 @@ cmake ..
 cd ..
 make -C build/
 clang -emit-llvm hello.c -c -o hello.bc
-opt -O3 -load build/indirect/LLVMPJT.so < hello.bc > /dev/nul
+opt -O3 -load build/indirect/LLVMPJT.so < hello.bc > /dev/null
 ```
 The first three are basically just a one time setup to get CMake to understand where to build the pass.
 The `make` command is what actually builds the pass, so do that after any changes.
