@@ -17,7 +17,25 @@ The last two lines show how to compile and execute an example C program through 
 templates in class is the `-O3`. This is required because this pass only runs after vectorization,
 which happens on the highest optimization option.
 
+## Getting Started with toy.c
+Ensure build directory exists. If not,
+```
+mkdir build
+cd build/
+cmake ..
+cd ..
+```
 
+Ensure base_array.txt and target_array.txt exist. If not,
+```
+clang -o a.out toy_helper.c
+./a.out
+```
+
+Optimize and execute code with run.sh script,
+```
+./run.sh toy
+```
 
 Artefact Evaluation Reproduction for "Software Prefetching for Indirect Memory Accesses", CGO 2017, using CK. 
 ==================================================
