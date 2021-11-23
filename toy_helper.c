@@ -4,8 +4,12 @@
 
 int main(int argc, char *argv[])
 {
+    // Create random seed for random numbers
+    int randomnumber;
+    srand(time(NULL));
+
     // Write base_array.txt and target_array.txt given a size parameter
-    int size = 1000;
+    int size = 100000000;
     if(argv[1]) {
         size = atoi(argv[1]);
     } 
@@ -20,10 +24,12 @@ int main(int argc, char *argv[])
 
     fprintf(file, "%d\n", size);
     for(int i = 0; i < size; i++) {
+        randomnumber = rand() % size;
+
         if(i != size - 1) {
-            fprintf(file, "%d\n", i);
+            fprintf(file, "%d\n", randomnumber);
         } else {
-            fprintf(file, "%d", i);
+            fprintf(file, "%d", randomnumber);
         }
     }
     fclose(file);
@@ -36,13 +42,9 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    // Create random seed for random numbers
-    int randomnumber;
-    srand(time(NULL));
-
     fprintf(file, "%d\n", size);
     for(int i = 0; i < size; i++) {
-        randomnumber = rand() % size + 1;
+        randomnumber = rand() % size;
 
         if(i != size - 1) {
             fprintf(file, "%d\n", randomnumber);
