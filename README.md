@@ -4,18 +4,31 @@ Make sure you have llvm 12 properly set up (for me, everything worked after inst
 Next, clone this repository. Here are the useful commands:
 
 ```
+mkdir build
 cd build/
 cmake ..
 cd ..
-make -C build/
-clang -emit-llvm hello.c -c -o hello.bc
-opt -O3 -load build/indirect/LLVMPJT.so < hello.bc > /dev/null
 ```
-The first three are basically just a one time setup to get CMake to understand where to build the pass.
-The `make` command is what actually builds the pass, so do that after any changes.
-The last two lines show how to compile and execute an example C program through the pass. The only difference with this from the
-templates in class is the `-O3`. This is required because this pass only runs after vectorization,
-which happens on the highest optimization option.
+One time setup.
+
+```
+make -C build/
+clang -O3 toy.c -S -emit-llvm -Xclang -load -Xclang build/indirect/LLVMPJT.so
+clang -O3 toy.ll
+./a.out
+```
+First command builds the pass itself.
+Second command uses clang to run our pass on the c file itself and output LLVM IR. It'll automatically make a file called
+`toy.ll` in this case that contains the IR. The third command turns the bitcode into a binary for us to run. The default
+output directory is `a.out` so just execute it to run the compiled example program.
+
+## Generating visualizations
+
+```
+opt -dot-cfg toy.ll > /dev/null
+cat .main.dot | dot -Tpdf > toy.pdf
+```
+First line generates the dot diagram, second line renders it as a PDF.
 
 ## Getting Started with toy.c
 Ensure build directory exists. If not,
