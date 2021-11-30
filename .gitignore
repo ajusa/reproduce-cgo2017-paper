@@ -2,5 +2,9 @@
 *tmp/
 build/*
 *.bc
+*.dot
 base_array.txt
 target_array.txt
+/a.out
+*.pdf
+*.ll
