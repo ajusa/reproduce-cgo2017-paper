@@ -12,6 +12,13 @@ int identity_func(int idx)
     return idx;
 }
 
+void indirect_access(int* base_array, int base_array_size, int* target_array, int target_array_size) {
+    for (int i = 0; i < base_array_size; i++)
+    {
+        target_array[func(base_array[i], target_array_size)]++;
+    }
+}
+
 int main(int argc, char *argv[])
 {
     // -------------------------- SET UP --------------------------
@@ -55,10 +62,7 @@ int main(int argc, char *argv[])
     // -------------------------- INDIRECT MEMORY ACCESS --------------------------
     clock_t begin = clock();
 
-    for (int i = 0; i < base_array_size; i++)
-    {
-        target_array[func(base_array[i], target_array_size)]++;
-    }
+    indirect_access(base_array, base_array_size, target_array, target_array_size);
 
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
