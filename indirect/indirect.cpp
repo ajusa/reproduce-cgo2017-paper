@@ -359,7 +359,6 @@ namespace {
 					}
 				}
 				else if(dyn_cast<StoreInst>(v->get())) {}
-				else if(dyn_cast<CallInst>(v->get())) {}
 				else if(dyn_cast<Instruction>(v->get()) && dyn_cast<Instruction>(v->get())->isTerminator()) {}
 				else if(LoadInst * linst = dyn_cast<LoadInst>(v->get())) {
 					//Cache results
@@ -413,6 +412,13 @@ namespace {
 				else if(v->get()) if(Instruction* k = dyn_cast<Instruction>(v->get())) {
 					if(!((!p) || L != nullptr)) continue;
 					Instruction* j = k;
+
+					if (CallInst *callInst = dyn_cast<CallInst>(k)) {
+						if (!callInst->onlyReadsMemory()) {
+							continue;
+						}
+					}
+
 					Loop* L = LI.getLoopFor(j->getParent());
 					if(L) { //checks if the use in the loop - Arham
 						SmallVector<Instruction*,8> Instrz;
