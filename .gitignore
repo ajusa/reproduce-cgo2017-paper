@@ -5,6 +5,7 @@ build/*
 *.dot
 base_array.txt
 target_array.txt
-/a.out
+a.out
 *.pdf
 *.ll
+wordcount/words_long.txt

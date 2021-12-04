@@ -50,6 +50,13 @@ Optimize and execute code with run.sh script,
 ./run.sh toy
 ```
 
+## Word Count
+```
+awk '{for(i=0;i<1000000;i++) print}' words.txt > words_long.txt
+```
+Do the above to generate a longer version of the word list. Running is just `./a.out wordcount/words_long.txt`. 
+Compiling is the same as above, just pass in count.c instead of toy.c.
+
 Artefact Evaluation Reproduction for "Software Prefetching for Indirect Memory Accesses", CGO 2017, using CK. 
 ==================================================
 

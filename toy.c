@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+int __attribute__ ((noinline)) func(int idx, int size);
 
 int func(int idx, int size)
 {
