@@ -208,11 +208,17 @@ namespace {
 				PHINode *PN = cast<PHINode>(I);
 				if(!PN->getIncomingValueForBlock(Backedge)) return nullptr;
 				if (Instruction *Inc =
-						dyn_cast<Instruction>(PN->getIncomingValueForBlock(Backedge)))
+						dyn_cast<Instruction>(PN->getIncomingValueForBlock(Backedge))) {
+					// if (Inc->getOpcode() == Instruction::Add &&
+					// 		Inc->getOperand(0) == PN)
+					// 	if (dyn_cast<ConstantInt>(Inc->getOperand(1)))
+					// 		return PN;
 					if (Inc->getOpcode() == Instruction::Add &&
-							Inc->getOperand(0) == PN)
-						if (dyn_cast<ConstantInt>(Inc->getOperand(1)))
-							return PN;
+						  (Inc->getOperand(0) == PN || 
+							Inc->getOperand(Inc->getNumOperands() - 1) == PN)) {
+						return PN;
+					}
+				}
 			}
 			return nullptr;
 		}
