@@ -17,7 +17,7 @@ double elapsed_time( void )
 }
 
 
-double start[64], elapsed[64];
+double start_var[64], elapsed[64];
 
 /*****************************************************************/
 /******            T  I  M  E  R  _  C  L  E  A  R          ******/
@@ -33,7 +33,7 @@ void timer_clear( int n )
 /*****************************************************************/
 void timer_start( int n )
 {
-    start[n] = elapsed_time();
+    start_var[n] = elapsed_time();
 }
 
 
@@ -45,7 +45,7 @@ void timer_stop( int n )
     double t, now;
 
     now = elapsed_time();
-    t = now - start[n];
+    t = now - start_var[n];
     elapsed[n] += t;
 
 }
